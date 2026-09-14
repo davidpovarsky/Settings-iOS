@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B0100010000000000000002 /* BiometricSecurityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0100010000000000000001 /* BiometricSecurityService.swift */; };
+		9B0100020000000000000002 /* ProviderValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0100020000000000000001 /* ProviderValidationService.swift */; };
+		9B0100030000000000000002 /* AIProvidersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0100030000000000000001 /* AIProvidersView.swift */; };
+		9B0100040000000000000002 /* ProviderDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0100040000000000000001 /* ProviderDetailView.swift */; };
+		9B0100050000000000000002 /* SearchAndToolProvidersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0100050000000000000001 /* SearchAndToolProvidersView.swift */; };
+		9B0100060000000000000002 /* MyAppsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0100060000000000000001 /* MyAppsViews.swift */; };
+		9B0100070000000000000002 /* SharedSettingsViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0100070000000000000001 /* SharedSettingsViews.swift */; };
+		9B0100080000000000000002 /* DiagnosticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0100080000000000000001 /* DiagnosticsView.swift */; };
+		9B0100090000000000000002 /* SecuritySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0100090000000000000001 /* SecuritySettingsView.swift */; };
+		9B0100320000000000000001 /* SharedSettingsKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9B0100310000000000000001 /* SharedSettingsKit */; };
 		8302AD272ECD4052001BC32D /* DebugSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302AD262ECD4052001BC32D /* DebugSearchView.swift */; };
 		8302AD292ECD42A5001BC32D /* DebugSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8302AD282ECD42A5001BC32D /* DebugSettingsView.swift */; };
 		8306AE6C2D0665A400D1AE5D /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8306AE6B2D0665A400D1AE5D /* ViewExtensions.swift */; };
@@ -201,6 +211,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9B0100010000000000000001 /* BiometricSecurityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricSecurityService.swift; sourceTree = "<group>"; };
+		9B0100020000000000000001 /* ProviderValidationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderValidationService.swift; sourceTree = "<group>"; };
+		9B0100030000000000000001 /* AIProvidersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIProvidersView.swift; sourceTree = "<group>"; };
+		9B0100040000000000000001 /* ProviderDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderDetailView.swift; sourceTree = "<group>"; };
+		9B0100050000000000000001 /* SearchAndToolProvidersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAndToolProvidersView.swift; sourceTree = "<group>"; };
+		9B0100060000000000000001 /* MyAppsViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAppsViews.swift; sourceTree = "<group>"; };
+		9B0100070000000000000001 /* SharedSettingsViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedSettingsViews.swift; sourceTree = "<group>"; };
+		9B0100080000000000000001 /* DiagnosticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosticsView.swift; sourceTree = "<group>"; };
+		9B0100090000000000000001 /* SecuritySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecuritySettingsView.swift; sourceTree = "<group>"; };
 		8302AD262ECD4052001BC32D /* DebugSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugSearchView.swift; sourceTree = "<group>"; };
 		8302AD282ECD42A5001BC32D /* DebugSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugSettingsView.swift; sourceTree = "<group>"; };
 		8306AE6B2D0665A400D1AE5D /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
@@ -394,6 +413,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B0100320000000000000001 /* SharedSettingsKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,6 +434,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9B0100100000000000000001 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				9B0100010000000000000001 /* BiometricSecurityService.swift */,
+				9B0100020000000000000001 /* ProviderValidationService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		9B0100200000000000000001 /* Hub */ = {
+			isa = PBXGroup;
+			children = (
+				9B0100030000000000000001 /* AIProvidersView.swift */,
+				9B0100040000000000000001 /* ProviderDetailView.swift */,
+				9B0100050000000000000001 /* SearchAndToolProvidersView.swift */,
+				9B0100060000000000000001 /* MyAppsViews.swift */,
+				9B0100070000000000000001 /* SharedSettingsViews.swift */,
+				9B0100080000000000000001 /* DiagnosticsView.swift */,
+				9B0100090000000000000001 /* SecuritySettingsView.swift */,
+			);
+			path = Hub;
+			sourceTree = "<group>";
+		};
 		83012BD62BFE516A00BF431C /* Assets */ = {
 			isa = PBXGroup;
 			children = (
@@ -551,6 +594,7 @@
 		833F0ACE2B744D180036EAD2 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
+				9B0100100000000000000001 /* Services */,
 				83A851BD2E0A4BD70041A3E6 /* SettingsApp.icon */,
 				8374E2E42DB33AE70044AF50 /* Preferences.entitlements */,
 				83CC61982B7952B800DAF0C1 /* Info.plist */,
@@ -700,6 +744,7 @@
 		838C23212B7468870053D4C5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9B0100200000000000000001 /* Hub */,
 				83AE01D72D655F5800724A34 /* Layout */,
 				837D1E252B96BF4500EDA7ED /* Apple Account */,
 				832FD8402BC230D500E99DEB /* Radios */,
@@ -939,6 +984,9 @@
 			dependencies = (
 			);
 			name = Preferences;
+			packageProductDependencies = (
+				9B0100310000000000000001 /* SharedSettingsKit */,
+			);
 			productName = Preferences;
 			productReference = 833F0ACC2B744D180036EAD2 /* Preferences.app */;
 			productType = "com.apple.product-type.application";
@@ -1029,6 +1077,9 @@
 				83937B7D2D8230A20049AB0E /* SettingsTopLevelPanesRenderTests */,
 				83937B902D8235310049AB0E /* SettingsTests */,
 			);
+			packageReferences = (
+				9B0100300000000000000001 /* XCLocalSwiftPackageReference "SharedSettingsKit" */,
+			);
 		};
 /* End PBXProject section */
 
@@ -1070,6 +1121,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B0100010000000000000002 /* BiometricSecurityService.swift in Sources */,
+				9B0100020000000000000002 /* ProviderValidationService.swift in Sources */,
+				9B0100030000000000000002 /* AIProvidersView.swift in Sources */,
+				9B0100040000000000000002 /* ProviderDetailView.swift in Sources */,
+				9B0100050000000000000002 /* SearchAndToolProvidersView.swift in Sources */,
+				9B0100060000000000000002 /* MyAppsViews.swift in Sources */,
+				9B0100070000000000000002 /* SharedSettingsViews.swift in Sources */,
+				9B0100080000000000000002 /* DiagnosticsView.swift in Sources */,
+				9B0100090000000000000002 /* SecuritySettingsView.swift in Sources */,
 				830976D32CDD1B2F0087F1A1 /* FollowUpView.swift in Sources */,
 				83D0A5222EF72ACB00DDFF4E /* OBCombinedSplashController.swift in Sources */,
 				832999532CAF93BA009AD115 /* MGHelper.swift in Sources */,
@@ -1407,7 +1467,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1353.2.7;
 				DEVELOPMENT_ASSET_PATHS = "\"Preferences/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = NA6HPWARQ2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Preferences/Info.plist;
@@ -1435,7 +1495,7 @@
 				LOCALIZATION_EXPORT_SUPPORTED = NO;
 				LOCALIZED_STRING_SWIFTUI_SUPPORT = NO;
 				MARKETING_VERSION = 1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.Preferences;
+				PRODUCT_BUNDLE_IDENTIFIER = com.itorah.settings;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1459,7 +1519,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1353.2.7;
 				DEVELOPMENT_ASSET_PATHS = "\"Preferences/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = NA6HPWARQ2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Preferences/Info.plist;
@@ -1487,9 +1547,10 @@
 				LOCALIZATION_EXPORT_SUPPORTED = NO;
 				LOCALIZED_STRING_SWIFTUI_SUPPORT = NO;
 				MARKETING_VERSION = 1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.Preferences;
+				PRODUCT_BUNDLE_IDENTIFIER = com.itorah.settings;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "iTorah_Settings_App_Store";
+				CODE_SIGN_STYLE = Manual;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -1506,7 +1567,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = NA6HPWARQ2;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
@@ -1529,7 +1590,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = NA6HPWARQ2;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
@@ -1553,7 +1614,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = NA6HPWARQ2;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
@@ -1577,7 +1638,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = NA6HPWARQ2;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
@@ -1635,6 +1696,21 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		9B0100300000000000000001 /* XCLocalSwiftPackageReference "SharedSettingsKit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = SharedSettingsKit;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9B0100310000000000000001 /* SharedSettingsKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9B0100300000000000000001 /* XCLocalSwiftPackageReference "SharedSettingsKit" */;
+			productName = SharedSettingsKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 833F0AC42B744D180036EAD2 /* Project object */;
 }

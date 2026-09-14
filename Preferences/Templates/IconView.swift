@@ -36,7 +36,33 @@ struct IconView: View {
             }
         } else if let asset = UIImage.icon(forBundleID: icon) {
             Image(uiImage: asset)
+        } else if !icon.isEmpty {
+            Image(systemName: icon)
+                .font(.system(size: 16, weight: .medium))
+                .foregroundStyle(.white)
+                .frame(width: 29, height: 29)
+                .background(iconColor(for: icon))
+                .clipShape(RoundedRectangle(cornerRadius: 6.5, style: .continuous))
         }
+    }
+
+    private func iconColor(for symbol: String) -> Color {
+        if symbol.contains("sparkles") || symbol.contains("bubble") {
+            return .blue
+        } else if symbol.contains("note") || symbol.contains("slider") {
+            return .orange
+        } else if symbol.contains("character") || symbol.contains("book") {
+            return .purple
+        } else if symbol.contains("magnifyingglass") || symbol.contains("network") {
+            return .teal
+        } else if symbol.contains("wrench") || symbol.contains("hammer") {
+            return .gray
+        } else if symbol.contains("lock") || symbol.contains("shield") {
+            return .green
+        } else if symbol.contains("person") || symbol.contains("stethoscope") {
+            return .indigo
+        }
+        return .blue
     }
 }
 

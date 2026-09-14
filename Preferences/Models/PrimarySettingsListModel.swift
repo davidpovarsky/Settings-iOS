@@ -1,5 +1,6 @@
 import SwiftUI
 import Network
+import SharedSettingsKit
 
 // MARK: - Global variables
 /// Global variables for access across views. (forceCellular, forcePhysical, developerMode)
@@ -79,6 +80,18 @@ enum PrimarySettingsListItemIdentifier: String {
     case continuityDebugging = "Continuity Debugging"
     case accessoryDeveloper = "Accessory Developer"
     case apps = "Apps"
+    case hanlin = "Hanlin / ChavrusaChat"
+    case pinkha = "Pinkha"
+    case chavrusaText = "ChavrusaText"
+    case maktabah = "Maktabah"
+    case aiProviders = "AI Providers"
+    case searchProviders = "Search Providers"
+    case developerServices = "Developer Services"
+    case accountsAndSignIns = "Accounts & Sign-ins"
+    case aiDefaults = "AI Defaults"
+    case commonServices = "Common Services"
+    case diagnostics = "Developer Diagnostics"
+    case credentialSecurity = "Credential Security"
 }
 
 /// Common device capabilities that are checked based on the current device.
@@ -178,6 +191,11 @@ final class PrimarySettingsListModel {
     private let queue = DispatchQueue.global(qos: .userInitiated)
     private(set) var isConnected: Bool = false
     
+    let myAppsSettings: [SettingsItem]
+    let accountsAndAPISettings: [SettingsItem]
+    let sharedSettings: [SettingsItem]
+    let hubSecuritySettings: [SettingsItem]
+
     let followUpSettings: [SettingsItem]
     let radioSettings: [SettingsItem]
     let mainSettings: [SettingsItem]
@@ -188,6 +206,78 @@ final class PrimarySettingsListModel {
     let developerSettings: [SettingsItem]
 
     init() {
+        myAppsSettings = [
+            SettingsItem(
+                type: .hanlin,
+                icon: "bubble.left.and.bubble.right.fill",
+                destination: AnyView(AppDetailView(app: .hanlin))
+            ),
+            SettingsItem(
+                type: .pinkha,
+                icon: "note.text",
+                destination: AnyView(AppDetailView(app: .pinkha))
+            ),
+            SettingsItem(
+                type: .chavrusaText,
+                icon: "character.book.closed.fill",
+                destination: AnyView(AppDetailView(app: .chavrusaText))
+            ),
+            SettingsItem(
+                type: .maktabah,
+                icon: "books.vertical.fill",
+                destination: AnyView(AppDetailView(app: .maktabah))
+            )
+        ]
+
+        accountsAndAPISettings = [
+            SettingsItem(
+                type: .aiProviders,
+                icon: "sparkles",
+                destination: AnyView(AIProvidersView())
+            ),
+            SettingsItem(
+                type: .searchProviders,
+                icon: "magnifyingglass",
+                destination: AnyView(SearchProvidersView())
+            ),
+            SettingsItem(
+                type: .developerServices,
+                icon: "wrench.and.screwdriver",
+                destination: AnyView(DeveloperServicesView())
+            ),
+            SettingsItem(
+                type: .accountsAndSignIns,
+                icon: "person.crop.circle",
+                destination: AnyView(AccountsAndSignInsView())
+            )
+        ]
+
+        sharedSettings = [
+            SettingsItem(
+                type: .aiDefaults,
+                icon: "slider.horizontal.3",
+                destination: AnyView(AIDefaultsView())
+            ),
+            SettingsItem(
+                type: .commonServices,
+                icon: "network",
+                destination: AnyView(CommonServicesView())
+            ),
+            SettingsItem(
+                type: .diagnostics,
+                icon: "stethoscope",
+                destination: AnyView(DiagnosticsView())
+            )
+        ]
+
+        hubSecuritySettings = [
+            SettingsItem(
+                type: .credentialSecurity,
+                icon: "lock.shield",
+                destination: AnyView(SecuritySettingsView())
+            )
+        ]
+
         followUpSettings = [
             SettingsItem(
                 type: .followUpItem,

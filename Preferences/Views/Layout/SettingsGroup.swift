@@ -14,6 +14,7 @@ struct SettingsGroup: View {
     @State private var showingSignInError = false
     @State private var showingSignInSheet = false
     let group: [SettingsItem]
+    let header: String?
     private static var loggedHiddenItems = Set<String>()
     private static let skipTypesBase: Set<PrimarySettingsListItemIdentifier> = [
         .accessoryDeveloper,
@@ -27,8 +28,9 @@ struct SettingsGroup: View {
         .vpn
     ]
     private static let skipTypesWithInternal = skipTypesBase.union([.internal])
-    init(_ item: [SettingsItem]) {
+    init(_ item: [SettingsItem], header: String? = nil) {
         self.group = item
+        self.header = header
     }
     
     var body: some View {
@@ -118,6 +120,10 @@ struct SettingsGroup: View {
                         }
                     }()
                 }
+            }
+        } header: {
+            if let header {
+                Text(header)
             }
         }
     }

@@ -1,0 +1,23 @@
+# Xcode
+.DS_Store
+*/.DS_Store
+build/
+DerivedData/
+*.moved-aside
+*.xcuserstate
+*.xcscmblueprint
+xcuserdata/
+
+# Swift Package Manager
+.build/
+*/.build/
+Packages/
+Package.resolved
+.swiftpm/
+
+# App Store Connect / signing artifacts
+*.p8
+*.p12
+*.cer
+*.mobileprovision
+ExportOptions.plist
