@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B0100410000000000000001 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 9B0100400000000000000001 /* PrivacyInfo.xcprivacy */; };
 		9B0100010000000000000002 /* BiometricSecurityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0100010000000000000001 /* BiometricSecurityService.swift */; };
 		9B0100020000000000000002 /* ProviderValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0100020000000000000001 /* ProviderValidationService.swift */; };
 		9B0100030000000000000002 /* AIProvidersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0100030000000000000001 /* AIProvidersView.swift */; };
@@ -594,6 +595,7 @@
 		833F0ACE2B744D180036EAD2 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
+				9B0100400000000000000001 /* PrivacyInfo.xcprivacy */,
 				9B0100100000000000000001 /* Services */,
 				83A851BD2E0A4BD70041A3E6 /* SettingsApp.icon */,
 				8374E2E42DB33AE70044AF50 /* Preferences.entitlements */,
@@ -1088,6 +1090,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B0100410000000000000001 /* PrivacyInfo.xcprivacy in Resources */,
 				83A851BE2E0A4BD70041A3E6 /* SettingsApp.icon in Resources */,
 				833F0AD72B744D190036EAD2 /* Preview Assets.xcassets in Resources */,
 				83AA2B032EDE2596003A924A /* iOS26Light.png in Resources */,
@@ -1494,7 +1497,7 @@
 				);
 				LOCALIZATION_EXPORT_SUPPORTED = NO;
 				LOCALIZED_STRING_SWIFTUI_SUPPORT = NO;
-				MARKETING_VERSION = 1;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.itorah.settings;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1546,7 +1549,7 @@
 				);
 				LOCALIZATION_EXPORT_SUPPORTED = NO;
 				LOCALIZED_STRING_SWIFTUI_SUPPORT = NO;
-				MARKETING_VERSION = 1;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.itorah.settings;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "iTorah_Settings_App_Store";
