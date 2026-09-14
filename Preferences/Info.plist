@@ -27,9 +27,6 @@
 		<false/>
 	</dict>
 	<key>UILaunchScreen</key>
-	<dict>
-		<key>UIColorName</key>
-		<string>LaunchBackgroundColor</string>
-	</dict>
+	<dict/>
 </dict>
 </plist>
