@@ -100,7 +100,7 @@ struct DeveloperServicesView: View {
         .navigationTitle(String(localized: "Developer Services & Telemetry"))
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            providers = ProviderRegistry.shared.providers(in: .tool) + ProviderRegistry.shared.providers(in: .integration)
+            providers = ProviderRegistry.shared.providers(in: .tool)
         }
     }
 }

@@ -93,3 +93,11 @@ struct AppsView: View {
         AppsView()
     }
 }
+
+struct AppInfo: Identifiable {
+    let id = UUID()
+    let name: String
+    let icon: String
+    let showOnSimulator: Bool
+}
+

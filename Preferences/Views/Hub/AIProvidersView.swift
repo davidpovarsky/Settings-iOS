@@ -119,7 +119,7 @@ struct AIProvidersView: View {
         ProviderRegistry.shared.register(descriptor)
 
         if let url = URL(string: customBaseURL) {
-            SharedPreferencesStore.shared.setBaseURL(url, for: id)
+            SharedPreferencesStore.shared.setCustomBaseURL(url, for: id)
         }
 
         loadProviders()
