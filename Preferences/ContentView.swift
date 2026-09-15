@@ -63,12 +63,7 @@ struct ContentView: View {
                         SettingsGroup(model.followUpSettings)
                     }
 
-                    SettingsGroup(model.myAppsSettings, header: "My Apps")
-                    SettingsGroup(model.accountsAndAPISettings, header: "Accounts & API")
-                    SettingsGroup(model.sharedSettings, header: "Shared Settings")
-                    SettingsGroup(model.hubSecuritySettings, header: "Security")
-
-                    SettingsGroup(model.radioSettings, header: "System")
+                    SettingsGroup(model.radioSettings)
                     SettingsGroup(model.mainSettings)
                     SettingsGroup(model.attentionSettings)
                     SettingsGroup(model.securitySettings)
@@ -156,7 +151,7 @@ struct ContentView: View {
         .onAppear {
             model.isCompact = horizontalSizeClass == .compact
             if model.selection == nil && UIDevice.iPad && !model.isCompact {
-                model.selection = model.accountsAndAPISettings.first
+                model.selection = model.mainSettings.first
             }
         }
         .onChange(of: model.path) { oldValue, _ in
@@ -167,7 +162,7 @@ struct ContentView: View {
         .onChange(of: horizontalSizeClass) {
             model.isCompact = horizontalSizeClass == .compact
             if !model.isCompact && model.selection == nil {
-                model.selection = model.accountsAndAPISettings.first
+                model.selection = model.mainSettings.first
             }
         }
         .onChange(of: searchText) {

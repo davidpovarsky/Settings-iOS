@@ -15,7 +15,7 @@ struct DiagnosticsView: View {
             if let report {
                 Section {
                     HStack {
-                        Text("Bundle Identifier")
+                        Text(String(localized: "Bundle Identifier"))
                         Spacer()
                         Text(report.bundleIdentifier)
                             .font(.footnote)
@@ -23,7 +23,7 @@ struct DiagnosticsView: View {
                     }
 
                     HStack {
-                        Text("Version & Build")
+                        Text(String(localized: "Version & Build"))
                         Spacer()
                         Text("\(report.appVersion) (\(report.buildNumber))")
                             .font(.footnote)
@@ -31,21 +31,21 @@ struct DiagnosticsView: View {
                     }
 
                     HStack {
-                        Text("App Group Container")
+                        Text(String(localized: "App Group Container"))
                         Spacer()
                         if report.isAppGroupAccessible {
-                            Text("Accessible")
+                            Text(String(localized: "Accessible"))
                                 .font(.footnote.weight(.medium))
                                 .foregroundStyle(.green)
                         } else {
-                            Text("Not Mounted")
+                            Text(String(localized: "Not Mounted"))
                                 .font(.footnote.weight(.medium))
                                 .foregroundStyle(.orange)
                         }
                     }
 
                     HStack {
-                        Text("App Group Identifier")
+                        Text(String(localized: "App Group Identifier"))
                         Spacer()
                         Text(report.appGroupIdentifier)
                             .font(.caption2)
@@ -53,7 +53,7 @@ struct DiagnosticsView: View {
                     }
 
                     HStack {
-                        Text("Keychain Access Group")
+                        Text(String(localized: "Keychain Access Group"))
                         Spacer()
                         Text(report.keychainAccessGroup)
                             .font(.caption2)
@@ -61,16 +61,16 @@ struct DiagnosticsView: View {
                     }
 
                     HStack {
-                        Text("Schema Version")
+                        Text(String(localized: "Schema Version"))
                         Spacer()
                         Text("v\(report.schemaVersion)")
                             .font(.footnote)
                             .foregroundStyle(.secondary)
                     }
                 } header: {
-                    Text("Environment & Identity")
+                    Text(String(localized: "Environment & Identity"))
                 } footer: {
-                    Text("Diagnostics inspect runtime container availability. Secrets are never displayed or stored in diagnostics.")
+                    Text(String(localized: "Diagnostics inspect runtime container availability. Secrets are never displayed or stored in diagnostics."))
                 }
 
                 Section {
@@ -80,18 +80,18 @@ struct DiagnosticsView: View {
                             Text(descriptor?.displayName ?? key)
                             Spacer()
                             if isConfigured {
-                                Text("Yes")
+                                Text(String(localized: "Yes"))
                                     .font(.subheadline.weight(.medium))
                                     .foregroundStyle(.green)
                             } else {
-                                Text("No")
+                                Text(String(localized: "No"))
                                     .font(.subheadline)
                                     .foregroundStyle(.secondary)
                             }
                         }
                     }
                 } header: {
-                    Text("Provider Configuration Presence")
+                    Text(String(localized: "Provider Configuration Presence"))
                 }
 
                 Section {
@@ -100,17 +100,17 @@ struct DiagnosticsView: View {
                     } label: {
                         HStack {
                             Image(systemName: "doc.on.doc")
-                            Text(showingCopiedToast ? "Copied Safe Report!" : "Copy Safe Report")
+                            Text(showingCopiedToast ? String(localized: "Report Copied") : String(localized: "Copy Diagnostics Report"))
                         }
                     }
                 } footer: {
-                    Text("This report strictly contains non-sensitive environment metadata and safe presence indicators suitable for integration debugging.")
+                    Text(String(localized: "This report strictly contains non-sensitive environment metadata and safe presence indicators suitable for integration debugging."))
                 }
             } else {
-                ProgressView("Gathering diagnostics...")
+                ProgressView(String(localized: "Testing..."))
             }
         }
-        .navigationTitle("Developer Diagnostics")
+        .navigationTitle(String(localized: "Developer Diagnostics"))
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             report = diagnosticsService.generateReport()

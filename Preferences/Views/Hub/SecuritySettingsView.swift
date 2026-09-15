@@ -10,8 +10,8 @@ struct SecuritySettingsView: View {
                 Toggle(isOn: $biometrics.isBiometricsEnabled) {
                     Label {
                         VStack(alignment: .leading, spacing: 2) {
-                            Text("Require \(biometrics.availableBiometricType.displayName)")
-                            Text("Prompt for authentication before revealing or editing API keys.")
+                            Text(String(localized: "Require Face ID"))
+                            Text(String(localized: "Prompt for authentication before revealing or editing API keys."))
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }
@@ -21,42 +21,42 @@ struct SecuritySettingsView: View {
                     }
                 }
             } header: {
-                Text("Biometric Protection")
+                Text(String(localized: "Biometric Protection"))
             } footer: {
-                Text("When enabled, accessing or changing sensitive keys requires authentication via Face ID, Touch ID, or your device passcode.")
+                Text(String(localized: "When enabled, accessing or changing sensitive keys requires authentication via Face ID, Touch ID, or your device passcode."))
             }
 
             Section {
                 HStack {
-                    Text("Keychain Accessibility")
+                    Text(String(localized: "Keychain Accessibility"))
                     Spacer()
-                    Text("After First Unlock")
+                    Text(String(localized: "After First Unlock"))
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                 }
 
                 HStack {
-                    Text("Credential Scope")
+                    Text(String(localized: "Credential Scope"))
                     Spacer()
-                    Text("Device Only")
+                    Text(String(localized: "Device Only"))
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                 }
 
                 HStack {
-                    Text("Ecosystem Access")
+                    Text(String(localized: "Ecosystem Access"))
                     Spacer()
-                    Text("Shared Team Group")
+                    Text(String(localized: "Shared Team Group"))
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                 }
             } header: {
-                Text("Storage Security Policy")
+                Text(String(localized: "Storage Security Policy"))
             } footer: {
-                Text("Credentials never leave this device unencrypted and are isolated to applications signed by your Apple Developer team.")
+                Text(String(localized: "Credentials never leave this device unencrypted and are isolated to applications signed by your Apple Developer team."))
             }
         }
-        .navigationTitle("Credential Security")
+        .navigationTitle(String(localized: "Ecosystem Credential Security"))
         .navigationBarTitleDisplayMode(.inline)
     }
 }

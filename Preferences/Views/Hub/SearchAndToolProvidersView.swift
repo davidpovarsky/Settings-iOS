@@ -28,11 +28,11 @@ struct SearchProvidersView: View {
                             Spacer()
 
                             if SharedCredentials.has(provider.id) {
-                                Text("Configured")
+                                Text(String(localized: "Configured"))
                                     .font(.subheadline.weight(.medium))
                                     .foregroundStyle(.green)
                             } else {
-                                Text("Not Configured")
+                                Text(String(localized: "Not Configured"))
                                     .font(.subheadline)
                                     .foregroundStyle(.secondary)
                             }
@@ -40,12 +40,12 @@ struct SearchProvidersView: View {
                     }
                 }
             } header: {
-                Text("Search APIs")
+                Text(String(localized: "Search Providers"))
             } footer: {
-                Text("Search keys provide web research capabilities for Hanlin agent tools and Maktabah.")
+                Text(String(localized: "Configure search API keys for Perplexity, Exa, and Tavily."))
             }
         }
-        .navigationTitle("Search Providers")
+        .navigationTitle(String(localized: "Search Providers"))
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             providers = ProviderRegistry.shared.providers(in: .search)
@@ -80,11 +80,11 @@ struct DeveloperServicesView: View {
                             Spacer()
 
                             if SharedCredentials.has(provider.id) {
-                                Text("Configured")
+                                Text(String(localized: "Configured"))
                                     .font(.subheadline.weight(.medium))
                                     .foregroundStyle(.green)
                             } else {
-                                Text("Not Configured")
+                                Text(String(localized: "Not Configured"))
                                     .font(.subheadline)
                                     .foregroundStyle(.secondary)
                             }
@@ -92,67 +92,15 @@ struct DeveloperServicesView: View {
                     }
                 }
             } header: {
-                Text("Tool & Developer Services")
+                Text(String(localized: "Developer Services & Telemetry"))
             } footer: {
-                Text("Developer tokens allow agent tooling, code search, and location services across apps.")
+                Text(String(localized: "Configure LangSmith, Helicone, and GitHub API credentials."))
             }
         }
-        .navigationTitle("Developer Services")
+        .navigationTitle(String(localized: "Developer Services & Telemetry"))
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
-            providers = ProviderRegistry.shared.providers(in: .tool)
-        }
-    }
-}
-
-struct AccountsAndSignInsView: View {
-    @State private var providers: [ProviderDescriptor] = []
-
-    var body: some View {
-        List {
-            Section {
-                ForEach(providers) { provider in
-                    NavigationLink {
-                        ProviderDetailView(provider: provider)
-                    } label: {
-                        HStack {
-                            Image(systemName: provider.symbolName)
-                                .foregroundStyle(.blue)
-                                .frame(width: 28, height: 28)
-
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(provider.displayName)
-                                    .font(.body)
-                                Text(provider.description)
-                                    .font(.caption)
-                                    .lineLimit(1)
-                                    .foregroundStyle(.secondary)
-                            }
-
-                            Spacer()
-
-                            if SharedCredentials.has(provider.id) {
-                                Text("Configured")
-                                    .font(.subheadline.weight(.medium))
-                                    .foregroundStyle(.green)
-                            } else {
-                                Text("Not Configured")
-                                    .font(.subheadline)
-                                    .foregroundStyle(.secondary)
-                            }
-                        }
-                    }
-                }
-            } header: {
-                Text("Shared Accounts")
-            } footer: {
-                Text("Ecosystem-level user accounts and synchronizer identities.")
-            }
-        }
-        .navigationTitle("Accounts & Sign-ins")
-        .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            providers = ProviderRegistry.shared.providers(in: .account)
+            providers = ProviderRegistry.shared.providers(in: .tool) + ProviderRegistry.shared.providers(in: .integration)
         }
     }
 }

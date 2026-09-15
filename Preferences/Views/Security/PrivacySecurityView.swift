@@ -321,6 +321,12 @@ struct PrivacySecurityView: View {
                         )
                     }
                     SLink(
+                        String(localized: "Ecosystem Credential Security"),
+                        icon: "lock.shield",
+                        subtitle: String(localized: "Require Face ID, Touch ID, or Passcode to view or modify shared API keys."),
+                        destination: SecuritySettingsView()
+                    )
+                    SLink(
                         "Wired Accessories".localized(path: privacy),
                         icon: "com.apple.graphic-icon.usb-c-port",
                         status: "Automatically Allow When Unlocked"

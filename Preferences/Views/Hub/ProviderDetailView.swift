@@ -26,18 +26,18 @@ struct ProviderDetailView: View {
             Section {
                 HStack {
                     Label {
-                        Text("Status")
+                        Text(String(localized: "Status"))
                     } icon: {
                         Image(systemName: provider.symbolName)
                             .foregroundStyle(.blue)
                     }
                     Spacer()
                     if hasKey {
-                        Text("Configured")
+                        Text(String(localized: "Configured"))
                             .font(.subheadline.weight(.medium))
                             .foregroundStyle(.green)
                     } else {
-                        Text("Not Configured")
+                        Text(String(localized: "Not Configured"))
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
                     }
@@ -45,7 +45,7 @@ struct ProviderDetailView: View {
 
                 if hasKey {
                     HStack {
-                        Text("API Key")
+                        Text(String(localized: "API Key"))
                         Spacer()
                         if isRevealed, let revealed = revealedKey {
                             Text(revealed)
@@ -63,7 +63,7 @@ struct ProviderDetailView: View {
                     } label: {
                         HStack {
                             Image(systemName: isRevealed ? "eye.slash" : "eye")
-                            Text(isRevealed ? "Hide Key" : "Reveal Key")
+                            Text(isRevealed ? String(localized: "Hide Key") : String(localized: "Reveal Key"))
                         }
                     }
 
@@ -71,26 +71,26 @@ struct ProviderDetailView: View {
                         newKeyInput = ""
                         showingKeySheet = true
                     } label: {
-                        Text("Replace Key")
+                        Text(String(localized: "Replace Key"))
                     }
 
                     Button(role: .destructive) {
                         showingDeleteConfirmation = true
                     } label: {
-                        Text("Delete Key")
+                        Text(String(localized: "Delete Key"))
                     }
                 } else {
                     Button {
                         newKeyInput = ""
                         showingKeySheet = true
                     } label: {
-                        Label("Configure API Key", systemImage: "key.fill")
+                        Label(String(localized: "Configure API Key"), systemImage: "key.fill")
                     }
                 }
             } header: {
-                Text("Credential")
+                Text(String(localized: "Credential"))
             } footer: {
-                Text("Secrets are securely stored in the shared iTorah Keychain and never written to plists, logs, or backups.")
+                Text(String(localized: "Secrets are securely stored in the shared iTorah Keychain and never written to plists, logs, or backups."))
             }
 
             // MARK: - Validation Action
@@ -104,7 +104,7 @@ struct ProviderDetailView: View {
                                 ProgressView()
                                     .padding(.trailing, 4)
                             }
-                            Text("Test Configuration")
+                            Text(String(localized: "Test Connection"))
                         }
                     }
                     .disabled(isValidating)
@@ -214,12 +214,12 @@ struct ProviderDetailView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
-                        Button("Cancel") {
+                        Button(String(localized: "Cancel")) {
                             showingKeySheet = false
                         }
                     }
                     ToolbarItem(placement: .confirmationAction) {
-                        Button("Save") {
+                        Button(String(localized: "Save")) {
                             saveNewKey()
                         }
                         .disabled(newKeyInput.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
@@ -232,10 +232,10 @@ struct ProviderDetailView: View {
             isPresented: $showingDeleteConfirmation,
             titleVisibility: .visible
         ) {
-            Button("Delete Key", role: .destructive) {
+            Button(String(localized: "Delete Key"), role: .destructive) {
                 deleteKey()
             }
-            Button("Cancel", role: .cancel) {}
+            Button(String(localized: "Cancel"), role: .cancel) {}
         } message: {
             Text("Any apps relying on this shared credential will no longer have access to \(provider.displayName).")
         }

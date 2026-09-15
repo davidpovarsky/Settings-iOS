@@ -3,6 +3,7 @@ import SharedSettingsKit
 
 struct AppDetailView: View {
     let app: AppDescriptor
+    @Environment(\.openURL) private var openURL
 
     var body: some View {
         List {
@@ -38,32 +39,32 @@ struct AppDetailView: View {
 
             Section {
                 HStack {
-                    Text("Connection Status")
+                    Text(String(localized: "Connection Status"))
                     Spacer()
-                    Text("Integration Planned (Phase 2)")
+                    Text(String(localized: "App Group Synced"))
                         .font(.subheadline.weight(.medium))
-                        .foregroundStyle(.orange)
+                        .foregroundStyle(.green)
                 }
 
                 HStack {
-                    Text("Shared Keychain")
+                    Text(String(localized: "Shared Keychain"))
                     Spacer()
-                    Text("Ready")
+                    Text(String(localized: "Ready"))
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
 
                 HStack {
-                    Text("Shared App Group")
+                    Text(String(localized: "Shared App Group"))
                     Spacer()
                     Text("group.com.itorah.shared")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
             } header: {
-                Text("Ecosystem Integration")
+                Text(String(localized: "Ecosystem Integration"))
             } footer: {
-                Text("Phase 2 will integrate SharedSettingsKit into \(app.displayName) to consume these shared credentials automatically.")
+                Text(String(localized: "Secrets are securely stored in the shared iTorah Keychain and never written to plists, logs, or backups."))
             }
 
             Section {
@@ -82,20 +83,30 @@ struct AppDetailView: View {
                         Spacer()
 
                         if isConfigured {
-                            Text("Configured")
+                            Text(String(localized: "Configured"))
                                 .font(.caption.weight(.medium))
                                 .foregroundStyle(.green)
                         } else {
-                            Text("Not Set")
+                            Text(String(localized: "Not Set"))
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }
                     }
                 }
             } header: {
-                Text("Expected Shared Credentials")
+                Text(String(localized: "Expected Shared Credentials"))
             } footer: {
-                Text("Configure these credentials under Accounts & API so they are immediately available when this app is connected.")
+                Text(String(localized: "Configure these credentials under Apple Intelligence so they are immediately available when this app is connected."))
+            }
+
+            Section {
+                Button {
+                    if let url = URL(string: "\(app.id)://") {
+                        openURL(url)
+                    }
+                } label: {
+                    Label(String(localized: "Open App"), systemImage: "arrow.up.forward.app")
+                }
             }
         }
         .navigationTitle(app.displayName)

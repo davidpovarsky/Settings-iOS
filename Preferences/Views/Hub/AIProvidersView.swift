@@ -31,11 +31,11 @@ struct AIProvidersView: View {
                             Spacer()
 
                             if SharedCredentials.has(provider.id) {
-                                Text("Configured")
+                                Text(String(localized: "Configured"))
                                     .font(.subheadline.weight(.medium))
                                     .foregroundStyle(.green)
                             } else {
-                                Text("Not Configured")
+                                Text(String(localized: "Not Configured"))
                                     .font(.subheadline)
                                     .foregroundStyle(.secondary)
                             }
@@ -43,9 +43,9 @@ struct AIProvidersView: View {
                     }
                 }
             } header: {
-                Text("Standard AI Providers")
+                Text(String(localized: "Standard AI Providers"))
             } footer: {
-                Text("Shared AI credentials are accessible by Hanlin, Pinkha, and family apps when enabled.")
+                Text(String(localized: "Shared AI credentials are accessible by Hanlin, Pinkha, and family apps when enabled."))
             }
 
             Section {
@@ -54,13 +54,13 @@ struct AIProvidersView: View {
                     customBaseURL = ""
                     showingAddCustomSheet = true
                 } label: {
-                    Label("Add Custom OpenAI-Compatible Provider", systemImage: "plus.circle.fill")
+                    Label(String(localized: "Add Custom Provider"), systemImage: "plus.circle.fill")
                 }
             } header: {
-                Text("Custom Endpoints")
+                Text(String(localized: "Custom Endpoints"))
             }
         }
-        .navigationTitle("AI Providers")
+        .navigationTitle(String(localized: "AI Providers"))
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             loadProviders()
@@ -69,27 +69,27 @@ struct AIProvidersView: View {
             NavigationStack {
                 Form {
                     Section {
-                        TextField("Provider Name (e.g. Local vLLM)", text: $customProviderName)
-                        TextField("Base URL (e.g. http://localhost:8000/v1)", text: $customBaseURL)
+                        TextField(String(localized: "Provider Name"), text: $customProviderName)
+                        TextField(String(localized: "Base URL"), text: $customBaseURL)
                             .keyboardType(.URL)
                             .autocorrectionDisabled()
                             .textInputAutocapitalization(.never)
                     } header: {
-                        Text("Provider Details")
+                        Text(String(localized: "Provider Details"))
                     } footer: {
-                        Text("Custom OpenAI-compatible providers can be used by apps that support custom endpoints.")
+                        Text(String(localized: "Custom OpenAI-compatible providers can be used by apps that support custom endpoints."))
                     }
                 }
-                .navigationTitle("Add Custom Provider")
+                .navigationTitle(String(localized: "Add Custom Provider"))
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
-                        Button("Cancel") {
+                        Button(String(localized: "Cancel")) {
                             showingAddCustomSheet = false
                         }
                     }
                     ToolbarItem(placement: .confirmationAction) {
-                        Button("Add") {
+                        Button(String(localized: "Add")) {
                             addCustomProvider()
                         }
                         .disabled(customProviderName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
@@ -108,24 +108,21 @@ struct AIProvidersView: View {
         guard !name.isEmpty else { return }
 
         let id = ProviderIdentifier.customAI(named: name)
-        let url = URL(string: customBaseURL.trimmingCharacters(in: .whitespacesAndNewlines))
-
         let descriptor = ProviderDescriptor(
             id: id,
             category: .ai,
             displayName: name,
-            description: "Custom OpenAI-compatible provider",
+            description: "Custom provider configured at \(customBaseURL)",
             symbolName: "server.rack",
-            defaultBaseURL: url,
-            isCustomBaseURLAllowed: true,
-            consumingAppIds: ["hanlin"]
+            defaultBaseURL: URL(string: customBaseURL)
         )
-
         ProviderRegistry.shared.register(descriptor)
-        if let url {
-            SharedPreferencesStore.shared.setCustomBaseURL(url, for: id)
+
+        if let url = URL(string: customBaseURL) {
+            SharedPreferencesStore.shared.setBaseURL(url, for: id)
         }
-        showingAddCustomSheet = false
+
         loadProviders()
+        showingAddCustomSheet = false
     }
 }

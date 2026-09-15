@@ -236,6 +236,24 @@ struct SiriView: View {
                     )
                 }
             }
+            
+            // MARK: AI Providers & Extensions
+            Section {
+                SLink(
+                    String(localized: "AI Providers"),
+                    icon: "sparkles",
+                    subtitle: String(localized: "Manage API keys for OpenAI, Anthropic, Gemini, Groq, and custom endpoints."),
+                    destination: AIProvidersView()
+                )
+                SLink(
+                    String(localized: "Model Defaults"),
+                    icon: "slider.horizontal.3",
+                    subtitle: String(localized: "Configure default reasoning, fast, voice, and embedding models."),
+                    destination: AIDefaultsView()
+                )
+            } header: {
+                Text(String(localized: "AI Providers & Extensions"))
+            }
         }
         .onOpenURL { url in
             if url.absoluteString == "pref://helpkit" {
