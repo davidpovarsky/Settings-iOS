@@ -217,6 +217,7 @@ jobs:
           test -d "$app"
           test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleIdentifier' "$app/Info.plist")" = "$APP_BUNDLE_ID"
           test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleDisplayName' "$app/Info.plist")" = "iTorah Settings"
+          test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleName' "$app/Info.plist")" = "iTorahSettings"
           test "$(/usr/libexec/PlistBuddy -c 'Print :CFBundleVersion' "$app/Info.plist")" = "$BUILD_NUMBER"
           codesign --verify --deep --strict --verbose=2 "$app"
 
