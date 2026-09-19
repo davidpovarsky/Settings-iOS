@@ -16,7 +16,12 @@ import UIKit
 public final class WallpaperPosterInstaller: @unchecked Sendable {
     public static let shared = WallpaperPosterInstaller()
 
+    private struct SendableBox<T>: @unchecked Sendable {
+        let value: T
+    }
+
     private let runtime = WallpaperPrivateRuntime.shared
+
     private let capabilitiesService = WallpaperPrivateCapabilities.shared
     private let stager = WallpaperImageStager.shared
     private let catalog = WallpaperCatalog.shared
@@ -241,7 +246,7 @@ public final class WallpaperPosterInstaller: @unchecked Sendable {
 
         let createCallable = unsafeBitCast(method_getImplementation(createMethod), to: CreateConfigFunc.self)
 
-        let initialConfig: AnyObject = try await withCheckedThrowingContinuation { continuation in
+        let initialConfigBox: SendableBox<AnyObject> = try await withCheckedThrowingContinuation { continuation in
             let completionBlock: @convention(block) (AnyObject?, NSError?) -> Void = { config, error in
                 if let error = error {
                     let details = self.mapNSError(error)
@@ -252,7 +257,7 @@ public final class WallpaperPosterInstaller: @unchecked Sendable {
                         userInfo: details.userInfo
                     ))
                 } else if let config = config {
-                    continuation.resume(returning: config)
+                    continuation.resume(returning: SendableBox(value: config))
                 } else {
                     continuation.resume(throwing: WallpaperInstallError.systemServiceCallFailed(
                         domain: "Preferences.WallpaperPrivate",
@@ -272,6 +277,8 @@ public final class WallpaperPosterInstaller: @unchecked Sendable {
                 completionBlock
             )
         }
+        let initialConfig = initialConfigBox.value
+
 
         SettingsLogger.info("Created preliminary poster configuration: \(String(describing: initialConfig))")
 
@@ -333,7 +340,7 @@ public final class WallpaperPosterInstaller: @unchecked Sendable {
 
         let updateConfigCallable = unsafeBitCast(method_getImplementation(updateConfigMethod), to: UpdateConfigFunc.self)
 
-        let updatedConfig: AnyObject = try await withCheckedThrowingContinuation { continuation in
+        let updatedConfigBox: SendableBox<AnyObject> = try await withCheckedThrowingContinuation { continuation in
             let completionBlock: @convention(block) (AnyObject?, NSError?) -> Void = { result, error in
                 if let error = error {
                     let details = self.mapNSError(error)
@@ -346,9 +353,9 @@ public final class WallpaperPosterInstaller: @unchecked Sendable {
                         userInfo: details.userInfo
                     ))
                 } else if let result = result {
-                    continuation.resume(returning: result)
+                    continuation.resume(returning: SendableBox(value: result))
                 } else {
-                    continuation.resume(returning: initialConfig)
+                    continuation.resume(returning: SendableBox(value: initialConfig))
                 }
             }
 
@@ -360,6 +367,8 @@ public final class WallpaperPosterInstaller: @unchecked Sendable {
                 completionBlock
             )
         }
+        let updatedConfig = updatedConfigBox.value
+
 
         SettingsLogger.info("Updated poster configuration with image: \(String(describing: updatedConfig))")
 
