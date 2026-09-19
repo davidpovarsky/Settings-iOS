@@ -17,7 +17,8 @@ import Darwin
 #endif
 
 /// Clean Swift facade for presenting Apple-hosted wallpaper UI components out-of-process.
-public final class WallpaperPosterUIBridge: @unchecked Sendable {
+@MainActor
+public final class WallpaperPosterUIBridge {
     public static let shared = WallpaperPosterUIBridge()
 
     // MARK: - Framework Paths
@@ -29,7 +30,6 @@ public final class WallpaperPosterUIBridge: @unchecked Sendable {
 
     /// Strongly retained modal controller to prevent deallocation during presentation.
     private var activeModalController: AnyObject?
-    private let lock = NSLock()
 
     private init() {}
 
@@ -106,9 +106,7 @@ public final class WallpaperPosterUIBridge: @unchecked Sendable {
         }
 
         // 6. Strongly retain controller in memory so presentation persists
-        lock.lock()
         self.activeModalController = controller
-        lock.unlock()
 
         // 7. Invoke presentFromWindowScene:
         let presentSel = NSSelectorFromString("presentFromWindowScene:")
@@ -199,8 +197,6 @@ public final class WallpaperPosterUIBridge: @unchecked Sendable {
 
     /// Clears any active modal controller reference.
     public func dismissActiveModalController() {
-        lock.lock()
-        defer { lock.unlock() }
         self.activeModalController = nil
     }
 

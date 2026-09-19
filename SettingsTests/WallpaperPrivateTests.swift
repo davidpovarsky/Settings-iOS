@@ -177,6 +177,7 @@ struct WallpaperPrivateTests {
         }
     }
 
+    @MainActor
     @Test
     func testUIBridgeSafeInspection() {
         let uiBridge = WallpaperPosterUIBridge.shared
