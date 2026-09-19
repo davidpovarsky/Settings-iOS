@@ -67,6 +67,8 @@ public enum WallpaperInstallError: LocalizedError, Sendable {
     case systemServiceCallFailed(domain: String, code: Int, message: String, userInfo: [String: String])
     case posterUpdateFailed(domain: String, code: Int, message: String, cleanupAttempted: Bool, cleanupSucceeded: Bool, userInfo: [String: String])
     case roleSelectionFailed(domain: String, code: Int, message: String, userInfo: [String: String])
+    case xpcBlockedBySandbox(reason: String)
+    case uiPresentationFailed(reason: String)
     case unsupported(reason: String)
 
     public var errorDescription: String? {
@@ -86,6 +88,10 @@ public enum WallpaperInstallError: LocalizedError, Sendable {
             return "Poster update failed [\(domain):\(code)]: \(message)\(cleanupNote)"
         case .roleSelectionFailed(let domain, let code, let message, _):
             return "Poster role selection failed [\(domain):\(code)]: \(message)"
+        case .xpcBlockedBySandbox(let reason):
+            return "PosterBoard XPC service blocked by sandbox: \(reason)"
+        case .uiPresentationFailed(let reason):
+            return "Apple UI presentation failed: \(reason)"
         case .unsupported(let reason):
             return "Wallpaper installation unsupported: \(reason)"
         }
@@ -205,6 +211,70 @@ public struct InstalledPosterSummary: Sendable, Identifiable {
     }
 }
 
+/// Entitlement audit data collected via dynamic SecTask introspection.
+public struct EntitlementAuditResult: Sendable {
+    public let machLookupExceptions: [String]
+    public let hasPosterBoardLookupException: Bool
+    public let rawEntitlements: [String: String]
+    public let auditError: String?
+
+    public init(
+        machLookupExceptions: [String],
+        hasPosterBoardLookupException: Bool,
+        rawEntitlements: [String: String],
+        auditError: String? = nil
+    ) {
+        self.machLookupExceptions = machLookupExceptions
+        self.hasPosterBoardLookupException = hasPosterBoardLookupException
+        self.rawEntitlements = rawEntitlements
+        self.auditError = auditError
+    }
+}
+
+/// Status of PosterBoard XPC service reachability.
+public enum XPCReachabilityStatus: Sendable, Equatable {
+    case available
+    case blockedBySandbox(reason: String)
+    case unreachable(reason: String)
+    case unknown
+
+    public var displayText: String {
+        switch self {
+        case .available:
+            return "Available"
+        case .blockedBySandbox(let reason):
+            return "Blocked by Sandbox (\(reason))"
+        case .unreachable(let reason):
+            return "Unreachable (\(reason))"
+        case .unknown:
+            return "Unknown"
+        }
+    }
+}
+
+/// Comprehensive reachability audit combining entitlement inspection and XPC probing.
+public struct ServiceReachabilityAudit: Sendable {
+    public let xpcStatus: XPCReachabilityStatus
+    public let prsServiceProbed: Bool
+    public let prsServiceError: String?
+    public let entitlementAudit: EntitlementAuditResult
+    public let auditedAt: Date
+
+    public init(
+        xpcStatus: XPCReachabilityStatus,
+        prsServiceProbed: Bool,
+        prsServiceError: String?,
+        entitlementAudit: EntitlementAuditResult,
+        auditedAt: Date = Date()
+    ) {
+        self.xpcStatus = xpcStatus
+        self.prsServiceProbed = prsServiceProbed
+        self.prsServiceError = prsServiceError
+        self.entitlementAudit = entitlementAudit
+        self.auditedAt = auditedAt
+    }
+}
+
 /// Comprehensive report of the runtime environment and private PosterBoard capabilities.
 public struct WallpaperRuntimeCapabilities: Sendable {
     public let osVersion: String
@@ -218,6 +288,7 @@ public struct WallpaperRuntimeCapabilities: Sendable {
     public let canAttemptPathB: Bool
     public let pathAAvailabilityReason: String
     public let pathBAvailabilityReason: String
+    public let serviceReachability: ServiceReachabilityAudit?
     public let generatedAt: Date
 
     public init(
@@ -232,6 +303,7 @@ public struct WallpaperRuntimeCapabilities: Sendable {
         canAttemptPathB: Bool,
         pathAAvailabilityReason: String,
         pathBAvailabilityReason: String,
+        serviceReachability: ServiceReachabilityAudit? = nil,
         generatedAt: Date = Date()
     ) {
         self.osVersion = osVersion
@@ -245,6 +317,7 @@ public struct WallpaperRuntimeCapabilities: Sendable {
         self.canAttemptPathB = canAttemptPathB
         self.pathAAvailabilityReason = pathAAvailabilityReason
         self.pathBAvailabilityReason = pathBAvailabilityReason
+        self.serviceReachability = serviceReachability
         self.generatedAt = generatedAt
     }
 
@@ -262,10 +335,24 @@ public struct WallpaperRuntimeCapabilities: Sendable {
         ## Execution Path Evaluation
         - Path A (PRSExternalSystemService direct): \(canAttemptPathA ? "AVAILABLE" : "UNAVAILABLE") (\(pathAAvailabilityReason))
         - Path B (PRSService + PRSPosterUpdate fallback): \(canAttemptPathB ? "AVAILABLE" : "UNAVAILABLE") (\(pathBAvailabilityReason))
-
-        ## Private Frameworks
         """
 
+        if let reachability = serviceReachability {
+            report += "\n\n## XPC Service Reachability & Sandbox Audit"
+            report += "\n- XPC Status: \(reachability.xpcStatus.displayText)"
+            if let err = reachability.prsServiceError {
+                report += "\n- PRSService Error: \(err)"
+            }
+            report += "\n- PosterBoard Mach Exception: \(reachability.entitlementAudit.hasPosterBoardLookupException ? "PRESENT" : "MISSING")"
+            if !reachability.entitlementAudit.machLookupExceptions.isEmpty {
+                report += "\n- Mach Lookup Exceptions: \(reachability.entitlementAudit.machLookupExceptions.joined(separator: ", "))"
+            }
+            if let auditErr = reachability.entitlementAudit.auditError {
+                report += "\n- Entitlement Audit Note: \(auditErr)"
+            }
+        }
+
+        report += "\n\n## Private Frameworks"
         for fw in frameworks {
             let status = fw.isLoaded ? "LOADED" : "FAILED"
             let errStr = fw.dlerrorString != nil ? " (Error: \(fw.dlerrorString!))" : ""

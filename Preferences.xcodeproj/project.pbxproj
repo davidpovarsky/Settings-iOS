@@ -13,6 +13,8 @@
 		9B0200040000000000000002 /* WallpaperImageStager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0200040000000000000001 /* WallpaperImageStager.swift */; };
 		9B0200050000000000000002 /* WallpaperCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0200050000000000000001 /* WallpaperCatalog.swift */; };
 		9B0200060000000000000002 /* WallpaperPosterInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0200060000000000000001 /* WallpaperPosterInstaller.swift */; };
+		9B0200090000000000000002 /* WallpaperServiceReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0200090000000000000001 /* WallpaperServiceReachability.swift */; };
+		9B02000A0000000000000002 /* WallpaperPosterUIBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B02000A0000000000000001 /* WallpaperPosterUIBridge.swift */; };
 		9B0200070000000000000002 /* CustomWallpapersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0200070000000000000001 /* CustomWallpapersView.swift */; };
 		9B0200080000000000000002 /* Wallpapers in Resources */ = {isa = PBXBuildFile; fileRef = 9B0200080000000000000001 /* Wallpapers */; };
 		9B0100410000000000000001 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 9B0100400000000000000001 /* PrivacyInfo.xcprivacy */; };
@@ -226,6 +228,8 @@
 		9B0200040000000000000001 /* WallpaperImageStager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperImageStager.swift; sourceTree = "<group>"; };
 		9B0200050000000000000001 /* WallpaperCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperCatalog.swift; sourceTree = "<group>"; };
 		9B0200060000000000000001 /* WallpaperPosterInstaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperPosterInstaller.swift; sourceTree = "<group>"; };
+		9B0200090000000000000001 /* WallpaperServiceReachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperServiceReachability.swift; sourceTree = "<group>"; };
+		9B02000A0000000000000001 /* WallpaperPosterUIBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperPosterUIBridge.swift; sourceTree = "<group>"; };
 		9B0200070000000000000001 /* CustomWallpapersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWallpapersView.swift; sourceTree = "<group>"; };
 		9B0200080000000000000001 /* Wallpapers */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Wallpapers; sourceTree = "<group>"; };
 		9B0100010000000000000001 /* BiometricSecurityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricSecurityService.swift; sourceTree = "<group>"; };
@@ -461,6 +465,8 @@
 				9B0200040000000000000001 /* WallpaperImageStager.swift */,
 				9B0200050000000000000001 /* WallpaperCatalog.swift */,
 				9B0200060000000000000001 /* WallpaperPosterInstaller.swift */,
+				9B0200090000000000000001 /* WallpaperServiceReachability.swift */,
+				9B02000A0000000000000001 /* WallpaperPosterUIBridge.swift */,
 			);
 			path = WallpaperPrivate;
 			sourceTree = "<group>";
@@ -1172,6 +1178,8 @@
 				9B0200040000000000000002 /* WallpaperImageStager.swift in Sources */,
 				9B0200050000000000000002 /* WallpaperCatalog.swift in Sources */,
 				9B0200060000000000000002 /* WallpaperPosterInstaller.swift in Sources */,
+				9B0200090000000000000002 /* WallpaperServiceReachability.swift in Sources */,
+				9B02000A0000000000000002 /* WallpaperPosterUIBridge.swift in Sources */,
 				9B0200070000000000000002 /* CustomWallpapersView.swift in Sources */,
 				9B0100010000000000000002 /* BiometricSecurityService.swift in Sources */,
 				9B0100020000000000000002 /* ProviderValidationService.swift in Sources */,

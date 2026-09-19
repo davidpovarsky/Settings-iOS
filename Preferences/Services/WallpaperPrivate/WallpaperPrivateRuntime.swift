@@ -19,6 +19,8 @@ public final class WallpaperPrivateRuntime: @unchecked Sendable {
     // MARK: - Constants
 
     public static let posterBoardServicesPath = "/System/Library/PrivateFrameworks/PosterBoardServices.framework/PosterBoardServices"
+    public static let posterBoardUIServicesPath = "/System/Library/PrivateFrameworks/PosterBoardUIServices.framework/PosterBoardUIServices"
+    public static let springBoardUIServicesPath = "/System/Library/PrivateFrameworks/SpringBoardUIServices.framework/SpringBoardUIServices"
     public static let photosFormatsPath = "/System/Library/PrivateFrameworks/PhotosFormats.framework/PhotosFormats"
     public static let photosUIPrivatePath = "/System/Library/PrivateFrameworks/PhotosUIPrivate.framework/PhotosUIPrivate"
 
@@ -35,6 +37,8 @@ public final class WallpaperPrivateRuntime: @unchecked Sendable {
 
     private let targetFrameworks: [(name: String, path: String)] = [
         ("PosterBoardServices", posterBoardServicesPath),
+        ("PosterBoardUIServices", posterBoardUIServicesPath),
+        ("SpringBoardUIServices", springBoardUIServicesPath),
         ("PhotosFormats", photosFormatsPath),
         ("PhotosUIPrivate", photosUIPrivatePath)
     ]
@@ -44,7 +48,13 @@ public final class WallpaperPrivateRuntime: @unchecked Sendable {
         "PRSService",
         "PRSPosterUpdate",
         "PFPosterMediaURLImage",
-        "PUWallpaperPosterEditorController"
+        "PUWallpaperPosterEditorController",
+        "PRUISModalEntryPointGallery",
+        "PRUISModalController",
+        "PRUISModalRemoteViewController",
+        "PRUISModalEntryPointEditing",
+        "PRUISModalEntryPointPosterSelection",
+        "SBSUIWallpaperPreviewViewController"
     ]
 
     private let targetSelectors: [TargetSelector] = [
@@ -58,6 +68,7 @@ public final class WallpaperPrivateRuntime: @unchecked Sendable {
         // PRSService
         TargetSelector(className: "PRSService", selectorName: "service", isClassMethod: true),
         TargetSelector(className: "PRSService", selectorName: "sharedInstance", isClassMethod: true),
+        TargetSelector(className: "PRSService", selectorName: "_serviceInterfaceWithError:", isClassMethod: false),
         TargetSelector(className: "PRSService", selectorName: "createPosterConfigurationForProviderIdentifier:posterDescriptorIdentifier:role:completion:", isClassMethod: false),
         TargetSelector(className: "PRSService", selectorName: "updatePosterConfiguration:update:completion:", isClassMethod: false),
         TargetSelector(className: "PRSService", selectorName: "updateSelectedForRoleIdentifier:newlySelectedConfiguration:completion:", isClassMethod: false),
@@ -74,7 +85,20 @@ public final class WallpaperPrivateRuntime: @unchecked Sendable {
         // PUWallpaperPosterEditorController
         TargetSelector(className: "PUWallpaperPosterEditorController", selectorName: "_loadImagePosterMedia:", isClassMethod: false),
         TargetSelector(className: "PUWallpaperPosterEditorController", selectorName: "_loadAssetPosterMedia:", isClassMethod: false),
-        TargetSelector(className: "PUWallpaperPosterEditorController", selectorName: "_loadContentForCurrentPosterMedia", isClassMethod: false)
+        TargetSelector(className: "PUWallpaperPosterEditorController", selectorName: "_loadContentForCurrentPosterMedia", isClassMethod: false),
+
+        // PRUISModalController
+        TargetSelector(className: "PRUISModalController", selectorName: "initWithEntryPoint:", isClassMethod: false),
+        TargetSelector(className: "PRUISModalController", selectorName: "presentFromWindowScene:", isClassMethod: false),
+        TargetSelector(className: "PRUISModalController", selectorName: "setDelegate:", isClassMethod: false),
+
+        // PRUISModalEntryPointGallery
+        TargetSelector(className: "PRUISModalEntryPointGallery", selectorName: "init", isClassMethod: false),
+
+        // SBSUIWallpaperPreviewViewController
+        TargetSelector(className: "SBSUIWallpaperPreviewViewController", selectorName: "initWithImage:", isClassMethod: false),
+        TargetSelector(className: "SBSUIWallpaperPreviewViewController", selectorName: "initWithImage:name:", isClassMethod: false),
+        TargetSelector(className: "SBSUIWallpaperPreviewViewController", selectorName: "setWallpaperForLocations:", isClassMethod: false)
     ]
 
     private let discoveryKeywords = [

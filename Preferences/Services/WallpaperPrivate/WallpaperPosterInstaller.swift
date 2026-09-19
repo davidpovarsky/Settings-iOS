@@ -58,10 +58,48 @@ public final class WallpaperPosterInstaller: @unchecked Sendable {
 
         if caps.canAttemptPathA {
             SettingsLogger.info("Attempting installation via Path A (PRSExternalSystemService)")
-            return try await executePathA(stagedURL: stagedURL, selectAfterCreation: selectAfterCreation)
+            do {
+                return try await executePathA(stagedURL: stagedURL, selectAfterCreation: selectAfterCreation)
+            } catch let error as WallpaperInstallError {
+                if let failure = error.failureDetails, failure.domain == "PRSService" && failure.code == 1 {
+                    SettingsLogger.error("Path A failed with PRSService:1 (Mach lookup target blocked by sandbox). Skipping Path B as it shares the identical XPC endpoint.")
+                    throw WallpaperInstallError.xpcBlockedBySandbox(
+                        reason: "com.apple.posterboardservices.services rejected connection [PRSService:1]. The app sandbox restricts direct mach-lookup to PosterBoard daemon. Use Apple Gallery or Wallpaper Preview instead."
+                    )
+                }
+
+                if caps.canAttemptPathB {
+                    SettingsLogger.info("Path A failed with non-IPC error; falling back to Path B: \(error.localizedDescription)")
+                    return try await executePathB(stagedURL: stagedURL, selectAfterCreation: selectAfterCreation)
+                } else {
+                    throw error
+                }
+            } catch {
+                let nsError = error as NSError
+                if nsError.domain == "PRSService" && nsError.code == 1 {
+                    SettingsLogger.error("Path A failed with PRSService:1. Skipping Path B.")
+                    throw WallpaperInstallError.xpcBlockedBySandbox(
+                        reason: "com.apple.posterboardservices.services rejected connection [PRSService:1]. The app sandbox restricts direct mach-lookup to PosterBoard daemon. Use Apple Gallery or Wallpaper Preview instead."
+                    )
+                }
+                if caps.canAttemptPathB {
+                    return try await executePathB(stagedURL: stagedURL, selectAfterCreation: selectAfterCreation)
+                } else {
+                    throw error
+                }
+            }
         } else if caps.canAttemptPathB {
             SettingsLogger.info("Attempting installation via Path B (PRSService + PRSPosterUpdate)")
-            return try await executePathB(stagedURL: stagedURL, selectAfterCreation: selectAfterCreation)
+            do {
+                return try await executePathB(stagedURL: stagedURL, selectAfterCreation: selectAfterCreation)
+            } catch let error as WallpaperInstallError {
+                if let failure = error.failureDetails, failure.domain == "PRSService" && failure.code == 1 {
+                    throw WallpaperInstallError.xpcBlockedBySandbox(
+                        reason: "com.apple.posterboardservices.services rejected connection [PRSService:1]. The app sandbox restricts direct mach-lookup to PosterBoard daemon."
+                    )
+                }
+                throw error
+            }
         } else {
             let reason = "Neither Path A nor Path B is available on this OS.\nPath A: \(caps.pathAAvailabilityReason)\nPath B: \(caps.pathBAvailabilityReason)"
             SettingsLogger.error(reason)

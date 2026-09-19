@@ -45,6 +45,9 @@ public final class WallpaperPrivateCapabilities: Sendable {
             selectors: probeResult.selectors
         )
 
+        // Reachability & Entitlement Audit
+        let reachabilityAudit = WallpaperServiceReachability.shared.audit()
+
         let capabilities = WallpaperRuntimeCapabilities(
             osVersion: osVersion,
             darwinVersion: darwinVersion,
@@ -56,10 +59,11 @@ public final class WallpaperPrivateCapabilities: Sendable {
             canAttemptPathA: canAttemptPathA,
             canAttemptPathB: canAttemptPathB,
             pathAAvailabilityReason: pathAReason,
-            pathBAvailabilityReason: pathBReason
+            pathBAvailabilityReason: pathBReason,
+            serviceReachability: reachabilityAudit
         )
 
-        SettingsLogger.info("Wallpaper probe finished: Path A=\(canAttemptPathA), Path B=\(canAttemptPathB)")
+        SettingsLogger.info("Wallpaper probe finished: Path A=\(canAttemptPathA), Path B=\(canAttemptPathB), XPC=\(reachabilityAudit.xpcStatus.displayText)")
         return capabilities
     }
 

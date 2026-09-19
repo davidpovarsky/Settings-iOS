@@ -140,4 +140,60 @@ struct WallpaperPrivateTests {
             Issue.record("Unexpected error type: \(error)")
         }
     }
+
+    // MARK: - Reachability & UI Bridge Tests
+
+    @Test
+    func testServiceReachabilityAuditAndClassification() {
+        let reachability = WallpaperServiceReachability.shared
+        let audit = reachability.audit()
+
+        // Audit should execute safely without crashing
+        #expect(audit.xpcStatus.displayText != "")
+        
+        // Error classification of PRSService:1
+        let prs1Error = NSError(domain: "PRSService", code: 1, userInfo: [NSLocalizedDescriptionKey: "Service remote target failed"])
+        let classified = reachability.classifyError(prs1Error)
+        switch classified {
+        case .blockedBySandbox(let reason):
+            #expect(reason.contains("PRSService:1"))
+        default:
+            Issue.record("Expected PRSService:1 to be classified as blockedBySandbox, got \(classified)")
+        }
+
+        // Install error classification
+        let installErr = WallpaperInstallError.systemServiceCallFailed(
+            domain: "PRSService",
+            code: 1,
+            message: "XPC failed",
+            userInfo: [:]
+        )
+        let classifiedInstallErr = reachability.classifyError(installErr)
+        switch classifiedInstallErr {
+        case .blockedBySandbox(let reason):
+            #expect(reason.contains("PRSService:1"))
+        default:
+            Issue.record("Expected WallpaperInstallError PRSService:1 to be classified as blockedBySandbox")
+        }
+    }
+
+    @Test
+    func testUIBridgeSafeInspection() {
+        let uiBridge = WallpaperPosterUIBridge.shared
+        _ = uiBridge.isGallerySupported()
+        _ = uiBridge.isPreviewSupported()
+        uiBridge.dismissActiveModalController()
+    }
+
+    @Test
+    func testCapabilitiesReportIncludesReachability() {
+        let caps = WallpaperPrivateCapabilities.shared.probe()
+        let report = caps.formattedReport()
+
+        #expect(report.contains("PosterBoardUIServices"))
+        #expect(report.contains("SpringBoardUIServices"))
+        if caps.serviceReachability != nil {
+            #expect(report.contains("XPC Service Reachability & Sandbox Audit"))
+        }
+    }
 }
