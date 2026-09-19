@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B0200010000000000000002 /* WallpaperPrivateTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0200010000000000000001 /* WallpaperPrivateTypes.swift */; };
+		9B0200020000000000000002 /* WallpaperPrivateRuntime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0200020000000000000001 /* WallpaperPrivateRuntime.swift */; };
+		9B0200030000000000000002 /* WallpaperPrivateCapabilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0200030000000000000001 /* WallpaperPrivateCapabilities.swift */; };
+		9B0200040000000000000002 /* WallpaperImageStager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0200040000000000000001 /* WallpaperImageStager.swift */; };
+		9B0200050000000000000002 /* WallpaperCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0200050000000000000001 /* WallpaperCatalog.swift */; };
+		9B0200060000000000000002 /* WallpaperPosterInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0200060000000000000001 /* WallpaperPosterInstaller.swift */; };
+		9B0200070000000000000002 /* CustomWallpapersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0200070000000000000001 /* CustomWallpapersView.swift */; };
+		9B0200080000000000000002 /* Wallpapers in Resources */ = {isa = PBXBuildFile; fileRef = 9B0200080000000000000001 /* Wallpapers */; };
 		9B0100410000000000000001 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 9B0100400000000000000001 /* PrivacyInfo.xcprivacy */; };
 		9B0100010000000000000002 /* BiometricSecurityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0100010000000000000001 /* BiometricSecurityService.swift */; };
 		9B0100020000000000000002 /* ProviderValidationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B0100020000000000000001 /* ProviderValidationService.swift */; };
@@ -212,6 +220,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9B0200010000000000000001 /* WallpaperPrivateTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperPrivateTypes.swift; sourceTree = "<group>"; };
+		9B0200020000000000000001 /* WallpaperPrivateRuntime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperPrivateRuntime.swift; sourceTree = "<group>"; };
+		9B0200030000000000000001 /* WallpaperPrivateCapabilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperPrivateCapabilities.swift; sourceTree = "<group>"; };
+		9B0200040000000000000001 /* WallpaperImageStager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperImageStager.swift; sourceTree = "<group>"; };
+		9B0200050000000000000001 /* WallpaperCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperCatalog.swift; sourceTree = "<group>"; };
+		9B0200060000000000000001 /* WallpaperPosterInstaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallpaperPosterInstaller.swift; sourceTree = "<group>"; };
+		9B0200070000000000000001 /* CustomWallpapersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomWallpapersView.swift; sourceTree = "<group>"; };
+		9B0200080000000000000001 /* Wallpapers */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Wallpapers; sourceTree = "<group>"; };
 		9B0100010000000000000001 /* BiometricSecurityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiometricSecurityService.swift; sourceTree = "<group>"; };
 		9B0100020000000000000001 /* ProviderValidationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProviderValidationService.swift; sourceTree = "<group>"; };
 		9B0100030000000000000001 /* AIProvidersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIProvidersView.swift; sourceTree = "<group>"; };
@@ -436,9 +452,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9B0200100000000000000001 /* WallpaperPrivate */ = {
+			isa = PBXGroup;
+			children = (
+				9B0200010000000000000001 /* WallpaperPrivateTypes.swift */,
+				9B0200020000000000000001 /* WallpaperPrivateRuntime.swift */,
+				9B0200030000000000000001 /* WallpaperPrivateCapabilities.swift */,
+				9B0200040000000000000001 /* WallpaperImageStager.swift */,
+				9B0200050000000000000001 /* WallpaperCatalog.swift */,
+				9B0200060000000000000001 /* WallpaperPosterInstaller.swift */,
+			);
+			path = WallpaperPrivate;
+			sourceTree = "<group>";
+		};
+		9B0200200000000000000001 /* Wallpaper */ = {
+			isa = PBXGroup;
+			children = (
+				9B0200070000000000000001 /* CustomWallpapersView.swift */,
+			);
+			path = Wallpaper;
+			sourceTree = "<group>";
+		};
 		9B0100100000000000000001 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				9B0200100000000000000001 /* WallpaperPrivate */,
 				9B0100010000000000000001 /* BiometricSecurityService.swift */,
 				9B0100020000000000000001 /* ProviderValidationService.swift */,
 			);
@@ -848,6 +886,7 @@
 		83B893BE2B8FDBDB005705A3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9B0200080000000000000001 /* Wallpapers */,
 				83F40FA52EEE9F5D0029D88C /* Localizable.xcstrings */,
 			);
 			path = Resources;
@@ -904,6 +943,7 @@
 		83F516C52C21EC570004E87A /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				9B0200200000000000000001 /* Wallpaper */,
 				838C232C2B74974B0053D4C5 /* General */,
 				83D7B44F2C925AEA00C2B81E /* Camera */,
 				83DF95772B84390D00AEEB63 /* Siri */,
@@ -1091,6 +1131,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B0200080000000000000002 /* Wallpapers in Resources */,
 				9B0100410000000000000001 /* PrivacyInfo.xcprivacy in Resources */,
 				83A851BE2E0A4BD70041A3E6 /* SettingsApp.icon in Resources */,
 				833F0AD72B744D190036EAD2 /* Preview Assets.xcassets in Resources */,
@@ -1125,6 +1166,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B0200010000000000000002 /* WallpaperPrivateTypes.swift in Sources */,
+				9B0200020000000000000002 /* WallpaperPrivateRuntime.swift in Sources */,
+				9B0200030000000000000002 /* WallpaperPrivateCapabilities.swift in Sources */,
+				9B0200040000000000000002 /* WallpaperImageStager.swift in Sources */,
+				9B0200050000000000000002 /* WallpaperCatalog.swift in Sources */,
+				9B0200060000000000000002 /* WallpaperPosterInstaller.swift in Sources */,
+				9B0200070000000000000002 /* CustomWallpapersView.swift in Sources */,
 				9B0100010000000000000002 /* BiometricSecurityService.swift in Sources */,
 				9B0100020000000000000002 /* ProviderValidationService.swift in Sources */,
 				9B0100030000000000000002 /* AIProvidersView.swift in Sources */,
