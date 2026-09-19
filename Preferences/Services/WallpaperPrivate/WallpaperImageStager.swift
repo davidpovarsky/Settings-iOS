@@ -12,12 +12,12 @@ import UIKit
 #endif
 
 /// Prepares, validates, and manages temporary local file URLs for PosterBoard ingestion.
-public final class WallpaperImageStager: Sendable {
+public final class WallpaperImageStager: @unchecked Sendable {
     public static let shared = WallpaperImageStager()
 
     public static let stagingDirectoryName = "WallpaperPrivateStaging"
 
-    private let fileManager = FileManager.default
+    private var fileManager: FileManager { FileManager.default }
 
     public init() {}
 
